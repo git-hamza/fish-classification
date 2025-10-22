@@ -1,6 +1,12 @@
-from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+import logging
+
 import torch
+from sklearn.metrics import accuracy_score
+
 import constants
+
+logger = logging.getLogger(constants.LOGGER_NAME)
+
 
 def evaluate_model(model, test_loader):
     # Initialize dictionaries to store correct and total predictions
@@ -34,21 +40,24 @@ def evaluate_model(model, test_loader):
                 if label == prediction:
                     correct_pred[classname] += 1
                 total_pred[classname] += 1
-            #TODO: remove this later
-            break
 
     # Calculate accuracy per class
-    accuracy_per_class = {classname: correct_pred[classname] / total_pred[classname] if total_pred[classname] > 0 else 0
-                          for classname in test_loader.dataset.classes}
+    accuracy_per_class = {
+        classname: (
+            correct_pred[classname] / total_pred[classname]
+            if total_pred[classname] > 0
+            else 0
+        )
+        for classname in test_loader.dataset.classes
+    }
 
     # Calculate overall accuracy
     overall_accuracy = accuracy_score(all_labels, all_preds)
 
-
     # Print the evaluation results
-    print("Accuracy per class:")
+    logger.info("Accuracy per class:")
     for classname, accuracy in accuracy_per_class.items():
-        print(f"{classname}: {accuracy:.4f}")
+        logger.info(f"{classname}: {accuracy:.4f}")
 
-    print()
-    print(f"Overall Accuracy: {overall_accuracy:.4f}")
+    logger.info(f"Overall Accuracy: {overall_accuracy:.4f}")
+    logger.info(f"Overall Accuracy: {overall_accuracy:.4f}")

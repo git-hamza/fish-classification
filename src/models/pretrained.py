@@ -1,6 +1,8 @@
-from torchvision import datasets, models
 import torch.nn as nn
+from torchvision import models
+
 import constants
+
 
 def resnet18(weights=None, output_labels=9):
     model_ft = models.resnet18(weights=weights)

@@ -1,6 +1,7 @@
 import logging
 
-def setup_logger(name, log_file,):
+
+def setup_logger(name, log_file):
     logger = logging.getLogger(name)
 
     formatter = logging.Formatter(
