@@ -15,21 +15,21 @@ logger = logging.getLogger(constants.LOGGER_NAME)
 DATA_TRANSFORM = {
     "train": v2.Compose(
         [
-            v2.Resize(224, 224),
+            v2.Resize((224, 224)),
             v2.ToTensor(),
             v2.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
         ]
     ),
     "val": v2.Compose(
         [
-            v2.Resize(224, 224),
+            v2.Resize((224, 224)),
             v2.ToTensor(),
             v2.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
         ]
     ),
     "test": v2.Compose(
         [
-            v2.Resize(224, 224),
+            v2.Resize((224, 224)),
             v2.ToTensor(),
             v2.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
         ]
