@@ -7,7 +7,7 @@ from torchvision import datasets
 from torchvision.transforms import v2
 
 import constants
-from dataset.custom_dataset import CustomDataset
+from src.dataset.custom_dataset import CustomDataset
 from src.utils.func_util import read_class_txt
 
 logger = logging.getLogger(constants.LOGGER_NAME)
@@ -95,7 +95,7 @@ class DataProcessor:
     def get_dataset(self):
         datadir_dict = self.split_data()
         image_datasets = {
-            x: datasets.ImageFolder(self.datadir_dict[x], DATA_TRANSFORM[x])
+            x: datasets.ImageFolder(datadir_dict[x], DATA_TRANSFORM[x])
             for x in datadir_dict
         }
 

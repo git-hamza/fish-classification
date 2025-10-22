@@ -19,7 +19,7 @@ logger = setup_logger(constants.LOGGER_NAME, os.path.join(constants.LOG_DIR, "ap
 
 
 def training_pipeline(
-    num_epochs=2,
+    num_epochs=1,
     lr=0.001,
 ):
     data_processor = DataProcessor()
@@ -73,7 +73,7 @@ def get_model_prediction(model, img_path, class_names):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Model Running Pipeline")
-    parser.add_argument("--mode", type=str, default="test")  # mode is train/test
+    parser.add_argument("--mode", type=str, default="train")  # mode is train/test
     parser.add_argument(
         "--img_path", type=str, default="data/split_data/test/Forell/00013.png"
     )

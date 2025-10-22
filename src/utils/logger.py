@@ -3,11 +3,9 @@ import logging
 
 def setup_logger(name, log_file):
     logger = logging.getLogger(name)
+    logger.setLevel(logging.INFO)
 
-    formatter = logging.Formatter(
-        fmt="{lineno} - {levelname} - {message}",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    )
+    formatter = logging.Formatter("%(filename)s-%(lineno)d - %(name)s - %(message)s")
 
     # Console handler
     console_handler = logging.StreamHandler()
