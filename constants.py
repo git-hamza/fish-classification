@@ -12,8 +12,8 @@ CKPT_PATH = os.path.join(BASE_DIR, "checkpoint")
 CONFIG_FILE_PATH = os.path.join(BASE_DIR, "config.yaml")
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 
-for dir in [LOG_DIR, CKPT_PATH]:
-    os.makedirs(LOG_DIR, exist_ok=True)
+for _dir in [LOG_DIR, CKPT_PATH]:
+    os.makedirs(_dir, exist_ok=True)
 
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"

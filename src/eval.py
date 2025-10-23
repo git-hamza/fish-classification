@@ -44,7 +44,7 @@ def evaluate_model(model: torch.nn.Module, test_loader: DataLoader) -> None:
         classname: (
             correct_pred[classname] / total_pred[classname]
             if total_pred[classname] > 0
-            else 0.0
+            else 0
         )
         for classname in test_loader.dataset.classes
     }
