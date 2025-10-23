@@ -1,4 +1,3 @@
-Apply
 # fish-classification
 
 A simple pipeline to train and test a ResNet-18 model for fish image classification.
