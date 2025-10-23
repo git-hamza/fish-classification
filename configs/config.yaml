@@ -1,0 +1,5 @@
+lr: 0.001
+batch_size: 32
+epochs: 10
+data_url: https://stnordaxoninternal.blob.core.windows.net/fish-dataset
+image_count: 1000

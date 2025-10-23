@@ -1,15 +1,19 @@
 import random
 
-import torch
 from torchvision import datasets
 from torchvision.transforms import v2
 
 
 # with Augmentation
 class CustomDataset(datasets.ImageFolder):
-    def __init__(self, data_dir, transform=None, augmentation=True):
+    def __init__(
+        self,
+        data_dir: str,
+        transform: v2.Compose | None = None,
+        augmentation: bool = False,
+    ) -> None:
         super().__init__(data_dir, transform=transform)
-
+        self.augmentation = augmentation
         self.augmentation_transform = [
             v2.RandomHorizontalFlip(),
             v2.RandomVerticalFlip(),
@@ -18,8 +22,7 @@ class CustomDataset(datasets.ImageFolder):
             v2.GaussianBlur(kernel_size=(5, 9)),
             v2.GaussianNoise(),
         ]
-
-        if augmentation:
+        if self.augmentation:
             self.samples_with_aug = [(el, "normal") for el in self.samples]
             self.samples_with_aug.extend([(el, "aug") for el in self.samples])
         else:
@@ -28,9 +31,12 @@ class CustomDataset(datasets.ImageFolder):
     def __len__(self) -> int:
         return len(self.samples_with_aug)
 
-    def __getitem__(self, index):
-        item, flag = self.samples_with_aug[index]
-        path, target = item
+    def __getitem__(self, index: int):
+        if self.augmentation:
+            path, target, flag = self.samples_with_aug[index]
+        else:
+            flag = "normal"
+            path, target = self.samples_with_aug[index]
 
         sample = self.loader(path)
 
@@ -47,16 +53,3 @@ class CustomDataset(datasets.ImageFolder):
             sample = transform(sample)
 
         return sample, target
-
-
-if __name__ == "__main__":
-    from dataset.loading_data import DATA_TRANSFORM
-
-    custom_data = CustomDataset(
-        data_dir="/Users/hash/hamza_data/Work/github/fish-classification/data/split_data/test",
-        transform=DATA_TRANSFORM["test"],
-    )
-    dataloader = torch.utils.data.DataLoader(custom_data)
-    for inputs, classes in dataloader:
-        print(classes)
-    print("data")

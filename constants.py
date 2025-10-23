@@ -1,5 +1,7 @@
 import os
 
+import torch
+
 LOGGER_NAME = "app"
 BASE_DIR = os.path.dirname(__file__)
 DATA_DIR = os.path.join(BASE_DIR, "data")
@@ -10,9 +12,8 @@ CKPT_PATH = os.path.join(BASE_DIR, "checkpoint")
 CONFIG_FILE_PATH = os.path.join(BASE_DIR, "config.yaml")
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 
-if not os.path.exists(LOG_DIR):
-    os.makedirs(LOG_DIR)
+for dir in [LOG_DIR, CKPT_PATH]:
+    os.makedirs(LOG_DIR, exist_ok=True)
 
-# We want to be able to train our model on an `accelerator <https://pytorch.org/docs/stable/torch.html#accelerators>`__
-# such as CUDA, MPS, MTIA, or XPU. If the current accelerator is available, we will use it. Otherwise, we use the CPU.
-DEVICE = "cpu"
+
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
