@@ -31,7 +31,6 @@ Notes:
 - https://medium.com/@imabhi1216/fine-tuning-a-pre-trained-resnet-18-model-for-image-classification-on-custom-dataset-with-pytorch-02df12e83c2c
 
 ### TODO:
-- adding config
 - rest api to for inference
 - containerize
 - monitoring
